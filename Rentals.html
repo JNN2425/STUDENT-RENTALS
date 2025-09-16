@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Rentals Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 text-gray-800">
+
+  <!-- Login Screen -->
+  <div id="loginPage" class="flex items-center justify-center min-h-screen bg-blue-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Student Login</h2>
+      <form onsubmit="return login(event)" class="space-y-4">
+        <div>
+          <label class="block font-semibold">Full Name</label>
+          <input type="text" id="name" placeholder="John Kimani" required 
+                 class="w-full p-2 border rounded"/>
+        </div>
+        <div>
+          <label class="block font-semibold">ID Number</label>
+          <input type="text" id="idNumber" placeholder="12345678" required pattern="[0-9]{8}" 
+                 class="w-full p-2 border rounded"/>
+        </div>
+        <div>
+          <label class="block font-semibold">Phone Number</label>
+          <input type="text" id="phone" placeholder="0712345678" required 
+                 class="w-full p-2 border rounded"/>
+          <p id="phoneError" class="text-red-600 text-sm hidden">Phone number must be 10 digits</p>
+        </div>
+        <button type="submit" class="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Website -->
+  <div id="mainPage" class="hidden">
+    <!-- Header -->
+    <header class="bg-blue-700 text-white p-4 shadow">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Student Rentals Kenya</h1>
+        <nav class="flex gap-4">
+          <a href="#" class="hover:underline">Home</a>
+          <a href="#listings" class="hover:underline">Listings</a>
+          <a href="#contact" class="hover:underline">Contact</a>
+          <span id="userName" class="ml-4 font-semibold"></span>
+          <button onclick="logout()" class="ml-4 bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20 text-center">
+      <h2 class="text-4xl font-bold">Find Affordable Rentals Near Campus</h2>
+      <p class="mt-2 text-lg">Easier, faster and safer way for students to get housing in Kenya</p>
+
+      <div class="mt-6 max-w-xl mx-auto flex bg-white rounded shadow overflow-hidden">
+        <input id="search" type="text" placeholder="Search by location or university..." 
+               class="flex-grow p-3 outline-none text-gray-700"/>
+        <button onclick="searchHouses()" class="bg-blue-700 px-6 py-3 hover:bg-blue-800">Search</button>
+      </div>
+    </section>
+
+    <!-- Listings -->
+    <main class="max-w-6xl mx-auto py-10 px-4">
+      <h3 class="text-2xl font-semibold mb-6">Available Rentals</h3>
+      <div id="listings" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Sample Rental -->
+        <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+          <img src="images/bed sitter.jpg" alt="Rental" class="w-full h-48 object-cover"/>
+          <div class="p-4">
+            <h4 class="font-bold text-lg">Bedsitter near KYU</h4>
+            <p class="text-gray-600 text-sm">Eustacian Apartment, Ngomongo</p>
+            <p class="mt-2 font-semibold text-blue-700">Ksh 6,000/month</p>
+            <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Contact Owner</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+          <img src="images/rental 1 bed room.jpeg" alt="Rental" class="w-full h-48 object-cover"/>
+          <div class="p-4">
+            <h4 class="font-bold text-lg">1 Bedroom near JKUAT</h4>
+            <p class="text-gray-600 text-sm">Juja, Kiambu</p>
+            <p class="mt-2 font-semibold text-blue-700">Ksh 10,000/month</p>
+            <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Contact Owner</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
+          <img src="images/rental bobea.jpg" alt="Rental" class="w-full h-48 object-cover"/>
+          <div class="p-4">
+            <h4 class="font-bold text-lg">Bobea Rentals KYU</h4>
+            <p class="text-gray-600 text-sm">Mjini, Kutus</p>
+            <p class="mt-2 font-semibold text-blue-700">Ksh 3,500/month</p>
+            <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Contact Owner</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-blue-100 py-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h3 class="text-2xl font-semibold mb-4 text-blue-700">Contact Us</h3>
+        <p class="mb-2">📞 Phone: <span class="font-semibold">0706908874</span></p>
+        <p class="mb-2">📧 Email: <span class="font-semibold">ngashmoryc@gmail.com</span></p>
+        <p>📍 Location: <span class="font-semibold">Kutus, Kirinyaga County</span></p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-700 text-white text-center py-6">
+      <p>&copy; 2025 Student Rentals Kenya | All rights reserved</p>
+    </footer>
+  </div>
+
+  <script>
+    function login(event) {
+      event.preventDefault();
+      let name = document.getElementById("name").value.trim();
+      let idNumber = document.getElementById("idNumber").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+
+      // Phone validation
+      if (phone.length !== 10 || !phone.startsWith("0")) {
+        document.getElementById("phoneError").classList.remove("hidden");
+        return false;
+      } else {
+        document.getElementById("phoneError").classList.add("hidden");
+      }
+
+      document.getElementById("loginPage").classList.add("hidden");
+      document.getElementById("mainPage").classList.remove("hidden");
+      document.getElementById("userName").innerText = "👋 " + name;
+    }
+
+    function logout() {
+      document.getElementById("mainPage").classList.add("hidden");
+      document.getElementById("loginPage").classList.remove("hidden");
+    }
+
+    function searchHouses() {
+      let query = document.getElementById("search").value.toLowerCase();
+      let listings = document.getElementById("listings").children;
+      for (let item of listings) {
+        let text = item.innerText.toLowerCase();
+        item.style.display = text.includes(query) ? "block" : "none";
+      }
+    }
+  </script>
+</body>
+</html>
